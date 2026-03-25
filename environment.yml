@@ -1,0 +1,13 @@
+name: eosc454-gravity
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy
+  - scipy
+  - matplotlib
+  - jupyter
+  - notebook
+  - simpeg
+  - discretize
+  - pymatsolver

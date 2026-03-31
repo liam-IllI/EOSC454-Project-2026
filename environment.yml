@@ -1,13 +1,13 @@
-name: eosc454-gravity
+name: simpeg_env
 channels:
   - conda-forge
+  - defaults
 dependencies:
   - python=3.11
-  - numpy
-  - scipy
-  - matplotlib
   - jupyter
-  - notebook
-  - simpeg
-  - discretize
-  - pymatsolver
+
+  - numpy=2.4.3
+  - scipy=1.17.1
+  - matplotlib=3.10.8
+  - discretize=0.12.0
+  - simpeg=0.25.2

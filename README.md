@@ -1,132 +1,112 @@
-# 3D Gravity Inversion of a Synthetic Geological Model in SimPEG
+# 3D Gravity Inversion Workflows in SimPEG
 
-This repository contains my EOSC 454 course project on 3D gravity inversion using SimPEG. The project investigates how well gravity inversion can recover the geometry and density distribution of a known synthetic geological model, and how different inversion and weighting strategies affect that recovery.
+This repository contains my EOSC 454 course project on 3D gravity inversion using SimPEG. It is now organized around two related workflows collected under `Codes/`:
 
-## Project question
+- a synthetic geological-model study used to test inversion behaviour in a controlled setting,
+- a field-data application that adapts the same inversion logic to the TKC ground gravity dataset.
 
-How well can 3D gravity inversion in SimPEG recover the geometry and density distribution of a known synthetic geological model, and how do sparse-norm inversion and different weighting strategies affect that recovery?
+## Project focus
 
-## Project overview
+The main technical question behind the project is:
 
-This project is designed as a closed-loop synthetic experiment. Starting from a known true geology model, I construct a density-contrast model, generate synthetic gravity anomaly data, and then invert those data using different inversion approaches. The recovered models are compared directly with the known truth.
+How well can 3D gravity inversion recover subsurface geometry and density structure, and how do different regularization and weighting strategies affect that recovery?
 
-The main workflow includes:
-- defining the mesh, topography, and active cells,
-- assigning a density-contrast model based on the true geology,
-- forward-modelling synthetic gravity anomaly data,
-- performing gravity inversion under different regularization and weighting strategies,
-- comparing the recovered models with the true model.
+Across the two workflows, the repository compares:
 
-## Methods and software
-
-This project is implemented in Python using SimPEG, following the general workflow of the SimPEG gravity inversion tutorials.
-
-The inversion approaches explored in this project include:
 - baseline weighted least-squares (WLS) inversion,
-- sparse-norm inversion using IRLS,
+- sparse-norm / IRLS inversion,
 - depth weighting,
 - sensitivity weighting.
 
-In practical terms, the repository is centered on one main notebook that:
-- loads the mesh, geology model, topography, and gravity observations,
-- visualizes the synthetic geological model,
-- runs several gravity inversions,
-- compares recovered density models against the known synthetic truth.
-
-## Data and model files
-
-This project is based on a synthetic geological model adapted from the SimPEG PGI tutorial workflow.
-
-Key files currently used in the repository include:
-- `mesh_tutorial.ubc` — model mesh,
-- `geology_true.mod` — true subsurface geology model,
-- `CDED_Lake_warp.xyz` — topography used to define surface geometry and active cells,
-- gravity data files generated or used during the workflow.
-
-The true geology model is converted into a density-contrast model, which is then used to forward-model synthetic gravity anomaly data for inversion experiments.
-
 ## Repository structure
 
-- `gravity/Geological_model_Inversion/`
-  Core project directory containing the main notebook, geological model files, mesh, topography, gravity data, and VTK outputs.
+The current working project content lives under `Codes/`.
 
-- `gravity/Geological_model_Inversion/geological_model.ipynb`
-  Main notebook and recommended starting point for understanding the full workflow.
+- `Codes/gravity/`
+  Synthetic-model workflow for the main EOSC 454 project.
 
-- `gravity/Geological_model_Inversion/mesh_tutorial.ubc`
-  Octree mesh used for the forward and inverse modelling workflow.
+- `Codes/gravity/Geological_model_Inversion/geological_model.ipynb`
+  Main synthetic-case notebook. This is the best starting point for understanding the core SimPEG workflow used in the project.
 
-- `gravity/Geological_model_Inversion/geology_true.mod`
-  True synthetic geology model used to construct the density-contrast model.
+- `Codes/gravity/Geological_model_Inversion/`
+  Mesh, geology model, topography, gravity observations, and VTK outputs used by the synthetic inversion notebook.
 
-- `gravity/Geological_model_Inversion/gravity_data.obs`
-  Gravity observation data used in the inversion experiments.
+- `Codes/gravity/Plots/`
+  Exported figures for the synthetic study, including observed data, inversion outputs, and comparison plots.
 
-- `gravity/Geological_model_Inversion/CDED_Lake_warp.xyz`
-  Topography file used to define the surface and active cells.
+- `Codes/gravity/Tutorial/`
+  Supporting SimPEG tutorial materials kept as references for the gravity workflow.
 
-- `gravity/Tutorial/`
-  Supporting tutorial notebooks for gravity forward modelling and inversion. These are references, not the main project entry point.
+- `Codes/gravity/454_presentation_Wu.pptx`
+  Project presentation slides.
 
-- `gravity/Plots/`
-  Exported figures from the inversion experiments.
+- `Codes/Field_application/`
+  Field-data extension of the project based on the TKC ground gravity dataset.
 
-- `README.md`
-  Project description and usage notes.
+- `Codes/Field_application/tkc_ground_gravity_field_inversion.ipynb`
+  Main field-application notebook. It follows the overall inversion flow of the synthetic notebook, but applies it to field observations.
 
-- `LICENSE`
-  Repository license.
+- `Codes/Field_application/TKC-ground-grav/`
+  Input field data files used by the TKC inversion workflow.
 
-## Goals
+- `Codes/Field_application/Plots/`
+  Exported figures for the field-data workflow.
 
-The main goals of this project are:
-- to build and run a complete synthetic 3D gravity inversion workflow in SimPEG,
-- to perform a baseline WLS inversion,
-- to perform a sparse-norm / IRLS inversion and compare it with the baseline result,
-- to evaluate inversion results using observed versus predicted gravity anomaly maps, residual maps, and slices or cross-sections of recovered density,
-- to compare recovered density models directly with the known true model,
-- to discuss which subsurface features are recoverable from gravity data alone and which remain ambiguous because of smoothing, depth bias, and non-uniqueness.
+- `Codes/Field_application/int-2016-0142.1.pdf`
+  Reference document associated with the field application.
 
-## Stretch goals
+- `environment.yml`
+  Conda environment definition for the project.
 
-Additional goals include:
-- comparing depth weighting and sensitivity weighting under similar inversion settings,
-- assessing which weighting strategy better reduces shallow bias,
-- evaluating which approach improves recovery of deeper structure.
+## Suggested starting points
 
-## How to use
+If you are opening the repository for the first time, use this order:
 
-If you are opening the repository for the first time, start here:
+1. Start with `Codes/gravity/Geological_model_Inversion/geological_model.ipynb` to see the complete synthetic workflow.
+2. Then open `Codes/Field_application/tkc_ground_gravity_field_inversion.ipynb` to see how the workflow is adapted to field data.
+3. Use the materials in `Codes/gravity/Tutorial/` as background references rather than the main project entry point.
 
-1. Open `gravity/Geological_model_Inversion/geological_model.ipynb`.
-2. Run the notebook from top to bottom in that directory so the relative paths to the mesh, model, topography, and gravity files resolve correctly.
-3. Use the notebooks in `gravity/Tutorial/` only as supporting references for the SimPEG workflow.
+## Data and outputs
 
-The repository contains multiple notebooks, but `gravity/Geological_model_Inversion/geological_model.ipynb` is the main project notebook and the best place to begin.
+The synthetic workflow includes:
 
-## Reproducibility
+- the mesh file used for forward and inverse modelling,
+- the true geology model used to build a density-contrast model,
+- topography and gravity observation files,
+- exported figures and VTK outputs for visualization.
 
-To make the project easier to understand and reproduce, this repository is being organized to include:
-- notebooks with documented workflow steps,
-- model, mesh, and topography files used in the experiments,
-- code and data files required for forward modelling and inversion,
-- a license for reuse permissions.
+The field workflow includes:
+
+- processed TKC gravity data files,
+- notebook-based inversion experiments,
+- exported plan-view and section-view figures for method comparison.
 
 ## Installation
 
-It is recommended to use a dedicated conda environment.
-
-Create the environment with:
+Create the conda environment with:
 
 ```bash
 conda env create -f environment.yml
 conda activate simpeg_env
 ```
 
-If `conda` is not available in your terminal, open an Anaconda Prompt first or add your Anaconda installation to `PATH` before running the commands above.
+The environment currently includes the main packages used in the notebooks:
 
-Notes:
-- The environment name in `environment.yml` is `simpeg_env`, so that is the name to activate.
-- The notebook depends on `discretize` and `simpeg`; if those imports fail, the environment is not active.
-- Launch Jupyter from the repository root or change into `gravity/Geological_model_Inversion/` before running `geological_model.ipynb`, so relative file paths resolve correctly.
-- The 3D visualization cell uses `pyvista`. If that backend is unavailable on your machine, the rest of the notebook can still be useful, but interactive 3D display may be limited.
+- `python=3.11`
+- `jupyter`
+- `numpy`
+- `scipy`
+- `matplotlib`
+- `discretize`
+- `simpeg`
+
+## Usage notes
+
+- Run notebooks from the repository root or from their own directories so the relative file paths resolve correctly.
+- The synthetic notebook is the main methodological reference for the project.
+- The field notebook is a companion application built on the same general inversion logic.
+- Exported figures are already included in the repository for quick inspection without rerunning the full notebooks.
+
+## License
+
+This repository is distributed under the terms of the `LICENSE` file in the project root.

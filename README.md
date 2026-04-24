@@ -27,6 +27,12 @@ The inversion approaches explored in this project include:
 - depth weighting,
 - sensitivity weighting.
 
+In practical terms, the repository is centered on one main notebook that:
+- loads the mesh, geology model, topography, and gravity observations,
+- visualizes the synthetic geological model,
+- runs several gravity inversions,
+- compares recovered density models against the known synthetic truth.
+
 ## Data and model files
 
 This project is based on a synthetic geological model adapted from the SimPEG PGI tutorial workflow.
@@ -41,11 +47,29 @@ The true geology model is converted into a density-contrast model, which is then
 
 ## Repository structure
 
-- `gravity/Geological_model/`
-  Geological model files, mesh files, topography, and notebooks related to model setup.
+- `gravity/Geological_model_Inversion/`
+  Core project directory containing the main notebook, geological model files, mesh, topography, gravity data, and VTK outputs.
+
+- `gravity/Geological_model_Inversion/geological_model.ipynb`
+  Main notebook and recommended starting point for understanding the full workflow.
+
+- `gravity/Geological_model_Inversion/mesh_tutorial.ubc`
+  Octree mesh used for the forward and inverse modelling workflow.
+
+- `gravity/Geological_model_Inversion/geology_true.mod`
+  True synthetic geology model used to construct the density-contrast model.
+
+- `gravity/Geological_model_Inversion/gravity_data.obs`
+  Gravity observation data used in the inversion experiments.
+
+- `gravity/Geological_model_Inversion/CDED_Lake_warp.xyz`
+  Topography file used to define the surface and active cells.
 
 - `gravity/Tutorial/`
-  Tutorial and workflow notebooks for gravity forward modelling and inversion.
+  Supporting tutorial notebooks for gravity forward modelling and inversion. These are references, not the main project entry point.
+
+- `gravity/Plots/`
+  Exported figures from the inversion experiments.
 
 - `README.md`
   Project description and usage notes.
@@ -72,11 +96,13 @@ Additional goals include:
 
 ## How to use
 
-A good place to start is with the notebooks in:
-- `gravity/Geological_model/`
-- `gravity/Tutorial/`
+If you are opening the repository for the first time, start here:
 
-These notebooks document the project workflow, including model setup, forward modelling, and inversion.
+1. Open `gravity/Geological_model_Inversion/geological_model.ipynb`.
+2. Run the notebook from top to bottom in that directory so the relative paths to the mesh, model, topography, and gravity files resolve correctly.
+3. Use the notebooks in `gravity/Tutorial/` only as supporting references for the SimPEG workflow.
+
+The repository contains multiple notebooks, but `gravity/Geological_model_Inversion/geological_model.ipynb` is the main project notebook and the best place to begin.
 
 ## Reproducibility
 
@@ -94,4 +120,13 @@ Create the environment with:
 
 ```bash
 conda env create -f environment.yml
-conda activate eosc454-gravity
+conda activate simpeg_env
+```
+
+If `conda` is not available in your terminal, open an Anaconda Prompt first or add your Anaconda installation to `PATH` before running the commands above.
+
+Notes:
+- The environment name in `environment.yml` is `simpeg_env`, so that is the name to activate.
+- The notebook depends on `discretize` and `simpeg`; if those imports fail, the environment is not active.
+- Launch Jupyter from the repository root or change into `gravity/Geological_model_Inversion/` before running `geological_model.ipynb`, so relative file paths resolve correctly.
+- The 3D visualization cell uses `pyvista`. If that backend is unavailable on your machine, the rest of the notebook can still be useful, but interactive 3D display may be limited.

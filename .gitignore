@@ -198,6 +198,9 @@ __MACOSX/
 ~$*.docx
 ~$*.xlsx
 
+# Local backup snapshots
+backup_before_fix_*/
+
 # Ruff stuff:
 .ruff_cache/
 

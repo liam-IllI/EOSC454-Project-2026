@@ -22,22 +22,22 @@ Across the two workflows, the repository compares:
 
 The current working project content lives under `Codes/`.
 
-- `Codes/gravity/`
+- `Codes/Tutorial_and_Synthetic/`
   Synthetic-model workflow for the main EOSC 454 project.
 
-- `Codes/gravity/Geological_model_Inversion/geological_model.ipynb`
+- `Codes/Tutorial_and_Synthetic/Geological_model_Inversion/geological_model.ipynb`
   Main synthetic-case notebook. This is the best starting point for understanding the core SimPEG workflow used in the project.
 
-- `Codes/gravity/Geological_model_Inversion/`
+- `Codes/Tutorial_and_Synthetic/Geological_model_Inversion/`
   Mesh, geology model, topography, gravity observations, and VTK outputs used by the synthetic inversion notebook.
 
-- `Codes/gravity/Plots/`
+- `Codes/Tutorial_and_Synthetic/Plots/`
   Exported figures for the synthetic study, including observed data, inversion outputs, and comparison plots.
 
-- `Codes/gravity/Tutorial/`
+- `Codes/Tutorial_and_Synthetic/Tutorial/`
   Supporting SimPEG tutorial materials kept as references for the gravity workflow.
 
-- `Codes/gravity/454_presentation_Wu.pptx`
+- `Codes/Tutorial_and_Synthetic/454_presentation_Wu.pptx`
   Project presentation slides.
 
 - `Codes/Field_application/`
@@ -62,9 +62,9 @@ The current working project content lives under `Codes/`.
 
 If you are opening the repository for the first time, use this order:
 
-1. Start with `Codes/gravity/Geological_model_Inversion/geological_model.ipynb` to see the complete synthetic workflow.
+1. Start with `Codes/Tutorial_and_Synthetic/Geological_model_Inversion/geological_model.ipynb` to see the complete synthetic workflow.
 2. Then open `Codes/Field_application/tkc_ground_gravity_field_inversion.ipynb` to see how the workflow is adapted to field data.
-3. Use the materials in `Codes/gravity/Tutorial/` as background references rather than the main project entry point.
+3. Use the materials in `Codes/Tutorial_and_Synthetic/Tutorial/` as background references rather than the main project entry point.
 
 ## Data and outputs
 
@@ -99,6 +99,7 @@ The environment currently includes the main packages used in the notebooks:
 - `matplotlib`
 - `discretize`
 - `simpeg`
+- `pyvista`
 
 ## Usage notes
 
